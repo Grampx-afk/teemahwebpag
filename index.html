@@ -3,844 +3,922 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TEEMAH STYLES AND MORE</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Bebas+Neue&display=swap" rel="stylesheet">
+<title>TEEMAH'S Styles and More</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Suisse+Int%27l:wght@300;400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --cream: #f7f0e6;
-    --sand: #e8d5b7;
-    --terracotta: #c4602a;
-    --warm-brown: #6b3d2e;
-    --deep-brown: #2a1a14;
-    --gold: #c9a84c;
-    --gold-light: #e8c96d;
-    --white: #fffdf9;
+    --cream: #F5F0E8;
+    --bone: #EDE7D9;
+    --char: #1A1714;
+    --warm-grey: #8B8278;
+    --rust: #B5572A;
+    --dust: #C9BFB0;
+    --ink: #2C2825;
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'Cormorant Garamond', serif;
-    background: var(--deep-brown);
-    color: var(--cream);
+    background: var(--cream);
+    color: var(--char);
+    font-family: 'DM Mono', monospace;
+    font-weight: 300;
+    font-size: 13px;
+    letter-spacing: 0.02em;
     cursor: none;
     overflow-x: hidden;
   }
 
+  /* Custom cursor */
   .cursor {
-    width: 12px; height: 12px;
-    background: var(--gold);
+    width: 8px; height: 8px;
+    background: var(--char);
     border-radius: 50%;
     position: fixed;
     top: 0; left: 0;
     pointer-events: none;
     z-index: 9999;
-    transition: transform 0.1s ease;
-    mix-blend-mode: difference;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s, width 0.2s, height 0.2s, background 0.2s;
   }
-  .cursor-follower {
+  .cursor-ring {
     width: 36px; height: 36px;
-    border: 1.5px solid var(--gold);
+    border: 1px solid var(--char);
     border-radius: 50%;
     position: fixed;
     top: 0; left: 0;
     pointer-events: none;
     z-index: 9998;
-    transition: 0.15s ease;
-    mix-blend-mode: difference;
+    transform: translate(-50%, -50%);
+    transition: transform 0.18s ease-out, width 0.25s, height 0.25s, opacity 0.2s;
+    opacity: 0.5;
   }
+  body:hover .cursor { opacity: 1; }
 
+  /* Nav */
   nav {
     position: fixed;
-    top: 0; width: 100%;
-    z-index: 1000;
-    padding: 24px 60px;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: all 0.4s ease;
+    padding: 28px 48px;
+    mix-blend-mode: multiply;
   }
-  nav.scrolled {
-    background: rgba(42,26,20,0.95);
-    backdrop-filter: blur(12px);
-    padding: 14px 60px;
-    border-bottom: 1px solid rgba(201,168,76,0.2);
-  }
-  .logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.6rem;
-    letter-spacing: 6px;
-    color: var(--gold);
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 300;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
     text-decoration: none;
+    color: var(--char);
   }
-  .logo span { color: var(--cream); }
   .nav-links {
     display: flex;
     gap: 40px;
     list-style: none;
-    align-items: center;
   }
   .nav-links a {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 0.85rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--cream);
     text-decoration: none;
+    color: var(--char);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-size: 11px;
+    transition: color 0.2s;
     position: relative;
-    transition: color 0.3s;
   }
   .nav-links a::after {
     content: '';
     position: absolute;
-    bottom: -4px; left: 0;
+    bottom: -2px; left: 0;
     width: 0; height: 1px;
-    background: var(--gold);
-    transition: width 0.3s ease;
+    background: var(--rust);
+    transition: width 0.3s;
   }
-  .nav-links a:hover { color: var(--gold); }
   .nav-links a:hover::after { width: 100%; }
-  .nav-cta {
-    background: var(--gold);
-    color: var(--deep-brown) !important;
-    padding: 10px 24px;
-    font-weight: 600;
-  }
-  .nav-cta::after { display: none !important; }
-  .nav-cta:hover { background: var(--gold-light); }
-  .cart-btn {
-    position: relative;
-    cursor: none;
-    background: none;
-    border: none;
-    color: var(--cream);
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 0.85rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    transition: color 0.3s;
-  }
-  .cart-btn:hover { color: var(--gold); }
-  .cart-count-badge {
-    position: absolute;
-    top: -8px; right: -8px;
-    width: 18px; height: 18px;
-    background: var(--terracotta);
-    border-radius: 50%;
-    font-size: 0.65rem;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    color: var(--cream);
-  }
-  .cart-count-badge.show { display: flex; }
+  .nav-links a:hover { color: var(--rust); }
 
-  .hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    cursor: none;
-    background: none;
-    border: none;
-    padding: 4px;
-    z-index: 1001;
+  /* Hero */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     position: relative;
-  }
-  .hamburger span { width: 28px; height: 2px; background: var(--gold); transition: all 0.3s; display: block; }
-
-  /* HERO */
-  #hero {
-    height: 100vh;
-    position: relative;
-    display: flex;
-    align-items: center;
     overflow: hidden;
   }
-  .hero-bg {
-    position: absolute; inset: 0;
-    background: 
-      radial-gradient(ellipse at 70% 50%, rgba(196,96,42,0.18) 0%, transparent 60%),
-      radial-gradient(ellipse at 20% 80%, rgba(201,168,76,0.12) 0%, transparent 50%),
-      linear-gradient(135deg, #2a1a14 0%, #1a0f0a 100%);
-  }
-  .hero-grid {
-    position: absolute; inset: 0;
-    background-image: 
-      linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
-    background-size: 80px 80px;
-  }
-  .hero-content {
-    position: relative; z-index: 2;
-    padding: 0 60px;
-    max-width: 800px;
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 120px 48px 80px;
+    position: relative;
+    z-index: 2;
   }
   .hero-eyebrow {
-    font-size: 0.8rem; letter-spacing: 8px; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 24px;
-    opacity: 0; transform: translateY(20px);
-    animation: fadeUp 0.8s ease 0.3s forwards;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--warm-grey);
+    margin-bottom: 24px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s 0.2s forwards;
   }
   .hero-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(4rem, 8vw, 9rem);
-    font-weight: 900; line-height: 0.95;
-    margin-bottom: 32px;
-    opacity: 0; transform: translateY(40px);
-    animation: fadeUp 1s ease 0.5s forwards;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(64px, 7vw, 110px);
+    font-weight: 300;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 40px;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUp 1s 0.4s forwards;
   }
-  .hero-title em { font-style: italic; color: var(--gold); display: block; }
-  .hero-desc {
-    font-size: 1.2rem; font-weight: 300; line-height: 1.8;
-    color: rgba(247,240,230,0.75); max-width: 480px;
+  .hero-title em {
+    font-style: italic;
+    color: var(--rust);
+  }
+  .hero-sub {
+    max-width: 360px;
+    line-height: 1.8;
+    color: var(--warm-grey);
     margin-bottom: 48px;
-    opacity: 0; transform: translateY(20px);
-    animation: fadeUp 0.8s ease 0.8s forwards;
-  }
-  .hero-buttons {
-    display: flex; gap: 20px; flex-wrap: wrap;
-    opacity: 0; transform: translateY(20px);
-    animation: fadeUp 0.8s ease 1s forwards;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.7s forwards;
   }
   .btn-primary {
-    background: var(--gold); color: var(--deep-brown);
-    padding: 16px 44px;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 0.9rem; font-weight: 600; letter-spacing: 4px;
-    text-transform: uppercase; border: none; cursor: none;
-    transition: all 0.3s ease; text-decoration: none;
-    display: inline-block; position: relative; overflow: hidden;
-  }
-  .btn-primary::before {
-    content: ''; position: absolute; inset: 0;
-    background: var(--gold-light);
-    transform: translateX(-100%); transition: transform 0.4s ease;
-  }
-  .btn-primary:hover::before { transform: translateX(0); }
-  .btn-primary span { position: relative; z-index: 1; }
-  .btn-outline {
-    background: transparent; color: var(--cream);
-    padding: 16px 44px;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 0.9rem; font-weight: 600; letter-spacing: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--char);
+    color: var(--cream);
+    text-decoration: none;
+    padding: 18px 36px;
+    font-size: 11px;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    border: 1.5px solid rgba(247,240,230,0.4);
-    cursor: none; transition: all 0.3s ease;
-    text-decoration: none; display: inline-block;
-  }
-  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
-
-  .hero-float {
-    position: absolute; right: 60px; top: 50%;
-    transform: translateY(-50%);
-    width: 420px; height: 560px;
+    transition: background 0.3s, color 0.3s, gap 0.3s;
+    width: fit-content;
     opacity: 0;
-    animation: fadeUp 1.2s ease 0.7s forwards;
+    animation: fadeUp 0.8s 0.9s forwards;
   }
-  .hero-float-card {
+  .btn-primary:hover {
+    background: var(--rust);
+    gap: 24px;
+  }
+  .btn-primary .arrow { font-size: 16px; }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+    background: var(--bone);
+  }
+  .hero-img-container {
     width: 100%; height: 100%;
-    background: linear-gradient(145deg, rgba(196,96,42,0.15), rgba(201,168,76,0.1));
-    border: 1px solid rgba(201,168,76,0.2);
-    display: flex; align-items: center; justify-content: center;
-    position: relative; overflow: hidden;
+    position: relative;
+    overflow: hidden;
   }
-  .hero-float-card::before {
-    content: ''; position: absolute;
-    top: -50%; left: -50%; width: 200%; height: 200%;
-    background: radial-gradient(circle, rgba(201,168,76,0.06), transparent 60%);
-    animation: rotate 12s linear infinite;
+  .hero-visual {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: scale(1.05);
+    animation: zoomOut 1.5s 0.2s forwards ease-out;
   }
-  .hero-float-inner { text-align: center; position: relative; z-index: 1; }
-  .hero-float-icon {
-    font-size: 8rem; line-height: 1; margin-bottom: 20px;
-    filter: drop-shadow(0 0 30px rgba(201,168,76,0.4));
-    animation: float 4s ease-in-out infinite;
+  /* Placeholder visual using CSS art */
+  .hero-placeholder {
+    width: 100%; height: 100%;
+    background: linear-gradient(160deg, #D4C9B8 0%, #BFB3A2 40%, #A89D8E 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
   }
-  .hero-float-label { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 6px; color: var(--gold); }
-  .hero-float-sub { font-size: 0.85rem; letter-spacing: 3px; text-transform: uppercase; color: rgba(247,240,230,0.5); margin-top: 8px; }
-  .hero-scroll {
-    position: absolute; bottom: 40px; left: 60px;
-    display: flex; align-items: center; gap: 16px;
-    opacity: 0; animation: fadeUp 0.8s ease 1.5s forwards;
+  .hero-placeholder::before {
+    content: '';
+    position: absolute;
+    width: 60%; height: 80%;
+    background: linear-gradient(180deg, #8B7F72 0%, #6B6058 100%);
+    border-radius: 100px 100px 0 0;
+    top: 10%;
+    opacity: 0.4;
   }
-  .hero-scroll span { font-size: 0.75rem; letter-spacing: 4px; text-transform: uppercase; color: rgba(247,240,230,0.5); }
-  .scroll-line { width: 60px; height: 1px; background: var(--gold); position: relative; overflow: hidden; }
-  .scroll-line::after {
-    content: ''; position: absolute; inset: 0; background: var(--cream);
-    animation: scrollLine 1.5s ease-in-out infinite;
+  .hero-placeholder::after {
+    content: 'SS 25';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 120px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.12);
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+    letter-spacing: -0.05em;
+    line-height: 1;
+  }
+  .hero-tag {
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    background: var(--cream);
+    padding: 16px 20px;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    z-index: 3;
+    opacity: 0;
+    animation: fadeUp 0.8s 1.1s forwards;
+  }
+  .hero-tag span { display: block; font-size: 13px; margin-top: 4px; font-family: 'Cormorant Garamond', serif; font-style: italic; }
+
+  .hero-scroll-hint {
+    position: absolute;
+    bottom: 40px;
+    left: 48px;
+    writing-mode: vertical-rl;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--warm-grey);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    opacity: 0;
+    animation: fadeIn 1s 1.5s forwards;
+    z-index: 3;
+  }
+  .hero-scroll-hint::before {
+    content: '';
+    width: 1px;
+    height: 60px;
+    background: var(--warm-grey);
+    animation: lineGrow 1s 1.5s forwards;
+    transform-origin: top;
+    transform: scaleY(0);
   }
 
-  /* MARQUEE */
-  .marquee-section { background: var(--gold); padding: 16px 0; overflow: hidden; }
-  .marquee-track { display: flex; gap: 60px; white-space: nowrap; animation: marquee 20s linear infinite; }
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+  @keyframes zoomOut {
+    to { transform: scale(1); }
+  }
+  @keyframes lineGrow {
+    to { transform: scaleY(1); }
+  }
+
+  /* Marquee */
+  .marquee-bar {
+    background: var(--char);
+    color: var(--cream);
+    padding: 16px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .marquee-inner {
+    display: inline-flex;
+    animation: marquee 20s linear infinite;
+    gap: 0;
+  }
   .marquee-item {
-    font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem;
-    letter-spacing: 4px; color: var(--deep-brown);
-    display: flex; align-items: center; gap: 20px;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    padding: 0 48px;
+    display: inline-flex;
+    align-items: center;
+    gap: 48px;
   }
-  .marquee-dot { width: 6px; height: 6px; background: var(--deep-brown); border-radius: 50%; }
+  .marquee-item::before {
+    content: '✦';
+    color: var(--rust);
+    font-size: 8px;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
 
-  /* COLLECTIONS */
-  #collections { padding: 120px 60px; background: var(--deep-brown); }
-  .section-header { text-align: center; margin-bottom: 80px; }
-  .section-tag { font-size: 0.75rem; letter-spacing: 6px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: block; }
-  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 5vw, 5rem); font-weight: 700; line-height: 1.1; color: var(--cream); }
-  .section-title em { font-style: italic; color: var(--gold); }
+  /* Section styling */
+  section { padding: 120px 48px; }
 
-  .collections-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
-  .collection-card { position: relative; height: 520px; overflow: hidden; cursor: none; }
-  .collection-card:first-child { grid-row: span 2; height: 100%; }
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--warm-grey);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::before {
+    content: '';
+    width: 32px; height: 1px;
+    background: var(--rust);
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(42px, 4.5vw, 72px);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 24px;
+  }
+  .section-title em { font-style: italic; color: var(--rust); }
 
-  .card-bg { position: absolute; inset: 0; transition: transform 0.7s ease; }
-  .collection-card:hover .card-bg { transform: scale(1.07); }
-  .card-bg-1 { background: linear-gradient(145deg, #3d1f15, #6b3d2e); }
-  .card-bg-2 { background: linear-gradient(145deg, #1a1208, #3d2e1a); }
-  .card-bg-3 { background: linear-gradient(145deg, #0f1a1a, #1a3030); }
-  .card-bg-4 { background: linear-gradient(145deg, #1a0f1a, #3d1f3d); }
-  .card-bg-5 { background: linear-gradient(145deg, #1a150f, #2e2514); }
+  /* Collections */
+  .collections { background: var(--cream); }
+  .collections-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 64px;
+  }
+  .collections-header p { max-width: 320px; color: var(--warm-grey); line-height: 1.8; }
+  .grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+  }
+  .product-card {
+    position: relative;
+    overflow: hidden;
+    cursor: none;
+    background: var(--bone);
+  }
+  .product-card:first-child { grid-row: span 2; }
+  .product-img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    display: block;
+    background: var(--bone);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.6s ease;
+  }
+  .product-card:first-child .product-img { aspect-ratio: auto; height: 100%; }
+  .product-card:hover .product-img { transform: scale(1.04); }
 
-  .card-pattern { position: absolute; inset: 0; opacity: 0.08; background-image: repeating-linear-gradient(45deg, var(--gold), var(--gold) 1px, transparent 1px, transparent 20px); }
-  .card-emoji { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -60%); font-size: 6rem; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.5)); transition: transform 0.5s ease; }
-  .collection-card:hover .card-emoji { transform: translate(-50%, -65%) scale(1.1); }
-  .card-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 40px 32px; background: linear-gradient(transparent, rgba(0,0,0,0.8)); transform: translateY(20px); transition: transform 0.4s ease; }
-  .collection-card:hover .card-overlay { transform: translateY(0); }
-  .card-cat { font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
-  .card-name { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: var(--cream); margin-bottom: 8px; }
-  .card-count { font-size: 0.85rem; color: rgba(247,240,230,0.6); letter-spacing: 2px; }
-  .card-arrow { position: absolute; top: 32px; right: 32px; width: 44px; height: 44px; border: 1.5px solid rgba(247,240,230,0.3); display: flex; align-items: center; justify-content: center; opacity: 0; transform: rotate(-45deg) scale(0.8); transition: all 0.4s ease; }
-  .collection-card:hover .card-arrow { opacity: 1; transform: rotate(0) scale(1); }
+  /* CSS product visuals */
+  .pv-1 { background: linear-gradient(145deg, #C4B9A8 0%, #8B7F70 100%); }
+  .pv-2 { background: linear-gradient(145deg, #2C2825 0%, #4A4440 100%); }
+  .pv-3 { background: linear-gradient(145deg, #B5572A 0%, #8B3D1A 100%); }
+  .pv-4 { background: linear-gradient(145deg, #D4C9B8 0%, #C0B49E 100%); }
+  .pv-5 { background: linear-gradient(145deg, #6B6058 0%, #4A4038 100%); }
 
-  /* PRODUCTS */
-  #products { padding: 120px 60px; background: #1a0f0a; }
-  .products-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; }
-  .view-all { color: var(--gold); font-size: 0.85rem; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; border-bottom: 1px solid var(--gold); padding-bottom: 4px; transition: opacity 0.3s; white-space: nowrap; }
-  .view-all:hover { opacity: 0.7; }
-  .products-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-  .product-card { cursor: none; position: relative; }
-  .product-img { aspect-ratio: 3/4; background: linear-gradient(145deg, #2a1a14, #1a0f0a); position: relative; overflow: hidden; margin-bottom: 16px; }
-  .product-emoji { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 5rem; transition: transform 0.5s ease; }
-  .product-card:hover .product-emoji { transform: translate(-50%, -55%) scale(1.1); }
-  .product-badge { position: absolute; top: 16px; left: 16px; background: var(--terracotta); color: var(--cream); font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; padding: 5px 10px; }
-  .product-wishlist { position: absolute; top: 12px; right: 12px; width: 36px; height: 36px; background: rgba(42,26,20,0.8); border: none; cursor: none; display: flex; align-items: center; justify-content: center; opacity: 0; transform: scale(0.8); transition: all 0.3s ease; font-size: 1rem; }
-  .product-card:hover .product-wishlist { opacity: 1; transform: scale(1); }
-  .product-wishlist.active { background: var(--terracotta); }
-  .product-add { position: absolute; bottom: 0; left: 0; right: 0; background: var(--gold); color: var(--deep-brown); border: none; cursor: none; padding: 14px; font-family: 'Cormorant Garamond', serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; transform: translateY(100%); transition: transform 0.4s ease; }
-  .product-card:hover .product-add { transform: translateY(0); }
-  .product-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--cream); margin-bottom: 4px; }
-  .product-style { font-size: 0.8rem; letter-spacing: 2px; color: rgba(247,240,230,0.5); text-transform: uppercase; margin-bottom: 8px; }
-  .product-price { font-size: 1rem; color: var(--gold); font-weight: 600; }
-  .product-price span { font-size: 0.85rem; color: rgba(247,240,230,0.4); text-decoration: line-through; margin-left: 8px; font-weight: 300; }
+  .product-img-inner {
+    width: 100%; height: 100%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.15);
+    letter-spacing: -0.03em;
+  }
 
-  /* WHY US */
-  #why { padding: 120px 60px; background: var(--deep-brown); position: relative; overflow: hidden; }
-  #why::before { content: ''; position: absolute; top: -200px; right: -200px; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(201,168,76,0.06), transparent 70%); }
-  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-top: 80px; }
-  .why-features { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-  .feature-item { padding: 32px; border: 1px solid rgba(201,168,76,0.15); position: relative; transition: all 0.4s ease; cursor: none; }
-  .feature-item:hover { border-color: var(--gold); background: rgba(201,168,76,0.05); }
-  .feature-item::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0; background: var(--gold); transition: height 0.4s ease; }
-  .feature-item:hover::before { height: 100%; }
-  .feature-icon { font-size: 2.4rem; margin-bottom: 16px; }
-  .feature-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--cream); margin-bottom: 8px; }
-  .feature-desc { font-size: 0.9rem; line-height: 1.7; color: rgba(247,240,230,0.6); }
-  .why-visual { position: relative; }
-  .why-big-num { font-family: 'Bebas Neue', sans-serif; font-size: 12rem; color: rgba(201,168,76,0.06); line-height: 1; position: absolute; top: -40px; right: -20px; pointer-events: none; }
-  .why-stats { position: relative; z-index: 1; }
-  .stat-item { padding: 32px 0; border-bottom: 1px solid rgba(201,168,76,0.15); }
-  .stat-item:last-child { border-bottom: none; }
-  .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 4rem; color: var(--gold); line-height: 1; margin-bottom: 4px; }
-  .stat-label { font-size: 0.85rem; letter-spacing: 3px; text-transform: uppercase; color: rgba(247,240,230,0.6); }
+  .product-info {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .product-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 4px;
+  }
+  .product-type { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--warm-grey); }
+  .product-price { font-size: 12px; letter-spacing: 0.05em; color: var(--rust); }
 
-  /* LOOKBOOK */
-  #lookbook { padding: 120px 0; background: #0f0807; overflow: hidden; }
-  .lookbook-header { text-align: center; margin-bottom: 60px; padding: 0 60px; }
-  .lookbook-scroll { display: flex; gap: 20px; padding: 0 60px; overflow-x: auto; scrollbar-width: none; cursor: none; }
-  .lookbook-scroll::-webkit-scrollbar { display: none; }
-  .look-card { flex: 0 0 320px; height: 480px; position: relative; overflow: hidden; cursor: none; }
-  .look-bg { position: absolute; inset: 0; transition: transform 0.6s ease; }
-  .look-card:hover .look-bg { transform: scale(1.05); }
-  .look-bg-1 { background: linear-gradient(160deg, #3d2515, #1a0f0a); }
-  .look-bg-2 { background: linear-gradient(160deg, #151a0f, #0a1408); }
-  .look-bg-3 { background: linear-gradient(160deg, #1a1015, #0f0a14); }
-  .look-bg-4 { background: linear-gradient(160deg, #1a1408, #0f0a05); }
-  .look-bg-5 { background: linear-gradient(160deg, #0f1a1a, #081414); }
-  .look-bg-6 { background: linear-gradient(160deg, #1a0f15, #14080f); }
-  .look-emoji { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 7rem; transition: all 0.5s ease; }
-  .look-card:hover .look-emoji { transform: translate(-50%, -55%) scale(1.1); }
-  .look-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 32px 24px; background: linear-gradient(transparent, rgba(0,0,0,0.85)); transform: translateY(12px); transition: transform 0.4s ease; }
-  .look-card:hover .look-info { transform: translateY(0); }
-  .look-num { font-family: 'Bebas Neue', sans-serif; font-size: 0.75rem; letter-spacing: 4px; color: var(--gold); margin-bottom: 6px; }
-  .look-name { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--cream); }
+  .product-overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--char);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .product-card:hover .product-overlay { opacity: 0.85; }
+  .product-overlay-btn {
+    color: var(--cream);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    border: 1px solid var(--cream);
+    padding: 14px 28px;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+  .product-overlay-btn:hover { background: var(--cream); color: var(--char); }
 
-  /* TESTIMONIALS */
-  #testimonials { padding: 120px 60px; background: #1a0f0a; }
-  .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 60px; }
-  .testimonial-card { padding: 40px; border: 1px solid rgba(201,168,76,0.15); position: relative; transition: all 0.4s ease; }
-  .testimonial-card:hover { border-color: rgba(201,168,76,0.4); transform: translateY(-6px); }
-  .testimonial-quote { font-family: 'Playfair Display', serif; font-size: 5rem; color: var(--gold); line-height: 0.8; margin-bottom: 20px; opacity: 0.4; }
-  .testimonial-text { font-size: 1.05rem; line-height: 1.8; color: rgba(247,240,230,0.8); font-style: italic; margin-bottom: 32px; }
-  .testimonial-author { display: flex; align-items: center; gap: 16px; }
-  .author-avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; }
-  .author-name { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--cream); }
-  .author-loc { font-size: 0.8rem; color: rgba(247,240,230,0.5); letter-spacing: 2px; text-transform: uppercase; margin-top: 2px; }
-  .stars { color: var(--gold); font-size: 0.85rem; margin-bottom: 16px; }
+  /* Philosophy */
+  .philosophy {
+    background: var(--ink);
+    color: var(--cream);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 120px;
+    align-items: center;
+  }
+  .philosophy .section-label { color: var(--dust); }
+  .philosophy .section-title { color: var(--cream); }
+  .philosophy p { color: var(--dust); line-height: 1.9; margin-bottom: 24px; }
+  .philosophy-visual {
+    position: relative;
+    height: 600px;
+  }
+  .phil-block {
+    position: absolute;
+    border: 1px solid rgba(245,240,232,0.1);
+  }
+  .phil-block-1 { inset: 0; background: linear-gradient(160deg, #3A3530 0%, #252220 100%); }
+  .phil-block-2 {
+    bottom: 0; left: -40px; right: 40px; height: 75%;
+    background: linear-gradient(160deg, #B5572A 0%, #8B3D1A 100%);
+    opacity: 0.9;
+  }
+  .phil-block-3 {
+    top: 20px; right: -20px;
+    width: 180px; height: 100px;
+    background: var(--cream);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--char);
+    z-index: 2;
+  }
+  .phil-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--rust);
+  }
+  .phil-label { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; }
+  .phil-text-overlay {
+    position: absolute;
+    bottom: 40px; left: 40px;
+    right: 80px;
+    z-index: 3;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--cream);
+    line-height: 1.4;
+  }
 
-  /* NEWSLETTER */
-  #newsletter { padding: 120px 60px; background: var(--deep-brown); text-align: center; position: relative; overflow: hidden; }
-  .newsletter-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 50%, rgba(196,96,42,0.1), transparent 50%), radial-gradient(ellipse at 70% 50%, rgba(201,168,76,0.08), transparent 50%); }
-  .newsletter-inner { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
-  .newsletter-title { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 700; line-height: 1.1; margin-bottom: 20px; }
-  .newsletter-title em { font-style: italic; color: var(--gold); }
-  .newsletter-sub { font-size: 1.1rem; color: rgba(247,240,230,0.65); line-height: 1.8; margin-bottom: 48px; }
-  .newsletter-form { display: flex; gap: 0; max-width: 500px; margin: 0 auto; }
-  .newsletter-input { flex: 1; background: rgba(247,240,230,0.06); border: 1.5px solid rgba(201,168,76,0.3); border-right: none; padding: 16px 24px; font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--cream); outline: none; transition: border-color 0.3s; }
-  .newsletter-input::placeholder { color: rgba(247,240,230,0.35); }
-  .newsletter-input:focus { border-color: var(--gold); }
-  .newsletter-btn { background: var(--gold); color: var(--deep-brown); border: none; padding: 16px 32px; font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; cursor: none; transition: background 0.3s; }
-  .newsletter-btn:hover { background: var(--gold-light); }
-  .newsletter-note { margin-top: 20px; font-size: 0.8rem; color: rgba(247,240,230,0.35); letter-spacing: 1px; }
+  /* Lookbook */
+  .lookbook { background: var(--bone); }
+  .lookbook-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 400px 400px;
+    gap: 2px;
+    margin-top: 64px;
+  }
+  .look-item {
+    overflow: hidden;
+    position: relative;
+    cursor: none;
+  }
+  .look-item:first-child { grid-row: span 2; }
+  .look-visual {
+    width: 100%; height: 100%;
+    transition: transform 0.7s ease;
+  }
+  .look-item:hover .look-visual { transform: scale(1.05); }
+  .lv-1 { background: linear-gradient(160deg, #D4C9B8 30%, #A89D8E 100%); }
+  .lv-2 { background: linear-gradient(160deg, #3A3530 0%, #2C2825 100%); }
+  .lv-3 { background: linear-gradient(160deg, #B5572A 0%, #7A3A1A 100%); }
+  .lv-4 { background: linear-gradient(160deg, #8B7F70 0%, #6B5F50 100%); }
+  .lv-5 { background: linear-gradient(145deg, #C4B9A8 0%, #A89D8E 100%); }
 
-  /* FOOTER */
-  footer { background: #0a0604; padding: 80px 60px 40px; border-top: 1px solid rgba(201,168,76,0.15); }
-  .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
-  .footer-brand .logo { font-size: 2rem; display: block; margin-bottom: 20px; }
-  .footer-brand p { font-size: 0.95rem; line-height: 1.8; color: rgba(247,240,230,0.55); max-width: 280px; margin-bottom: 28px; }
-  .social-links { display: flex; gap: 12px; }
-  .social-link { width: 40px; height: 40px; border: 1px solid rgba(201,168,76,0.3); display: flex; align-items: center; justify-content: center; color: var(--cream); text-decoration: none; font-size: 1rem; transition: all 0.3s; cursor: none; }
-  .social-link:hover { border-color: var(--gold); background: rgba(201,168,76,0.1); }
-  .footer-col h4 { font-family: 'Bebas Neue', sans-serif; font-size: 0.9rem; letter-spacing: 4px; color: var(--gold); margin-bottom: 24px; }
+  .look-caption {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(0deg, rgba(26,23,20,0.8) 0%, transparent 100%);
+    padding: 48px 24px 24px;
+    color: var(--cream);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .look-item:hover .look-caption { opacity: 1; }
+  .look-caption strong { display: block; font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; }
+  .look-caption span { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--dust); }
+
+  /* Newsletter */
+  .newsletter {
+    background: var(--char);
+    color: var(--cream);
+    text-align: center;
+    padding: 120px 48px;
+  }
+  .newsletter .section-label { justify-content: center; }
+  .newsletter .section-label::before { background: var(--rust); }
+  .newsletter .section-title { color: var(--cream); margin-bottom: 16px; }
+  .newsletter p { color: var(--dust); margin-bottom: 48px; }
+  .newsletter-form {
+    display: flex;
+    max-width: 480px;
+    margin: 0 auto;
+    gap: 0;
+  }
+  .newsletter-form input {
+    flex: 1;
+    background: transparent;
+    border: 1px solid rgba(245,240,232,0.2);
+    border-right: none;
+    padding: 18px 24px;
+    color: var(--cream);
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    outline: none;
+  }
+  .newsletter-form input::placeholder { color: var(--warm-grey); }
+  .newsletter-form button {
+    background: var(--rust);
+    border: none;
+    padding: 18px 32px;
+    color: var(--cream);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: none;
+    transition: background 0.2s;
+  }
+  .newsletter-form button:hover { background: #c4622e; }
+
+  /* Footer */
+  footer {
+    background: var(--cream);
+    padding: 64px 48px 40px;
+    border-top: 1px solid var(--dust);
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 64px;
+  }
+  .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300; letter-spacing: 0.15em; margin-bottom: 16px; }
+  .footer-tagline { color: var(--warm-grey); line-height: 1.8; max-width: 260px; }
+  .footer-col h4 { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 20px; color: var(--char); }
   .footer-col ul { list-style: none; }
-  .footer-col ul li { margin-bottom: 12px; }
-  .footer-col ul a { font-size: 0.9rem; color: rgba(247,240,230,0.55); text-decoration: none; letter-spacing: 1px; transition: color 0.3s; }
-  .footer-col ul a:hover { color: var(--gold); }
-  .footer-bottom { border-top: 1px solid rgba(201,168,76,0.1); padding-top: 32px; display: flex; justify-content: space-between; align-items: center; }
-  .footer-bottom p { font-size: 0.8rem; color: rgba(247,240,230,0.35); letter-spacing: 1px; }
+  .footer-col ul li { margin-bottom: 10px; }
+  .footer-col ul li a { text-decoration: none; color: var(--warm-grey); font-size: 12px; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--rust); }
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 32px;
+    border-top: 1px solid var(--dust);
+    color: var(--warm-grey);
+    font-size: 11px;
+  }
+  .social-links { display: flex; gap: 24px; }
+  .social-links a { color: var(--warm-grey); text-decoration: none; letter-spacing: 0.15em; font-size: 10px; text-transform: uppercase; transition: color 0.2s; }
+  .social-links a:hover { color: var(--rust); }
 
-  /* CART */
-  .cart-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 5000; opacity: 0; pointer-events: none; transition: opacity 0.4s; }
-  .cart-overlay.open { opacity: 1; pointer-events: all; }
-  .cart-drawer { position: fixed; top: 0; right: 0; width: 400px; height: 100%; background: var(--deep-brown); border-left: 1px solid rgba(201,168,76,0.2); z-index: 5001; transform: translateX(100%); transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; }
-  .cart-drawer.open { transform: translateX(0); }
-  .cart-header { padding: 32px; border-bottom: 1px solid rgba(201,168,76,0.15); display: flex; justify-content: space-between; align-items: center; }
-  .cart-header h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 4px; color: var(--gold); }
-  .cart-close { background: none; border: none; color: var(--cream); font-size: 1.5rem; cursor: none; padding: 4px; transition: color 0.3s; }
-  .cart-close:hover { color: var(--gold); }
-  .cart-items { flex: 1; overflow-y: auto; padding: 24px 32px; }
-  .cart-empty { text-align: center; padding: 60px 20px; color: rgba(247,240,230,0.4); font-size: 1rem; letter-spacing: 2px; }
-  .cart-empty-icon { font-size: 4rem; display: block; margin-bottom: 20px; }
-  .cart-item { display: flex; gap: 16px; padding: 20px 0; border-bottom: 1px solid rgba(201,168,76,0.1); animation: fadeUp 0.3s ease; }
-  .cart-item-img { width: 72px; height: 90px; background: rgba(201,168,76,0.1); display: flex; align-items: center; justify-content: center; font-size: 2rem; flex-shrink: 0; }
-  .cart-item-info { flex: 1; }
-  .cart-item-name { font-family: 'Playfair Display', serif; font-size: 1rem; margin-bottom: 4px; }
-  .cart-item-price { color: var(--gold); font-size: 0.9rem; margin-bottom: 12px; }
-  .cart-item-qty { display: flex; align-items: center; gap: 12px; }
-  .qty-btn { width: 28px; height: 28px; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.2); color: var(--cream); cursor: none; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
-  .qty-btn:hover { background: var(--gold); color: var(--deep-brown); }
-  .qty-num { font-size: 0.9rem; min-width: 20px; text-align: center; }
-  .cart-remove { background: none; border: none; color: rgba(247,240,230,0.3); cursor: none; font-size: 1.2rem; align-self: flex-start; transition: color 0.3s; }
-  .cart-remove:hover { color: var(--terracotta); }
-  .cart-footer { padding: 24px 32px; border-top: 1px solid rgba(201,168,76,0.15); }
-  .cart-total { display: flex; justify-content: space-between; margin-bottom: 20px; font-family: 'Playfair Display', serif; font-size: 1.1rem; }
-  .cart-total span:last-child { color: var(--gold); font-weight: 700; }
-  .cart-checkout { width: 100%; background: var(--gold); color: var(--deep-brown); border: none; padding: 18px; font-family: 'Cormorant Garamond', serif; font-size: 0.9rem; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; cursor: none; transition: background 0.3s; }
-  .cart-checkout:hover { background: var(--gold-light); }
-
-  /* TOAST */
-  .toast { position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--gold); color: var(--deep-brown); padding: 14px 28px; font-family: 'Cormorant Garamond', serif; font-size: 0.9rem; font-weight: 600; letter-spacing: 2px; z-index: 9999; opacity: 0; transition: all 0.4s ease; pointer-events: none; }
-  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-  /* ANIMATIONS */
-  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
-  @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-  @keyframes scrollLine { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
-
-  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-
-  /* RESPONSIVE */
-  @media (max-width: 1100px) {
-    .collections-grid { grid-template-columns: repeat(2, 1fr); }
-    .collection-card:first-child { grid-row: span 1; height: 520px; }
-    .products-grid { grid-template-columns: repeat(2, 1fr); }
-    .hero-float { display: none; }
-    .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
-    .testimonials-grid { grid-template-columns: 1fr 1fr; }
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { height: 60vh; }
+    .grid-4 { grid-template-columns: repeat(2, 1fr); }
+    .product-card:first-child { grid-row: auto; }
+    .philosophy { grid-template-columns: 1fr; gap: 60px; }
+    .philosophy-visual { height: 400px; }
+    .lookbook-grid { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, 300px); }
+    .look-item:first-child { grid-row: auto; grid-column: span 2; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 768px) {
     nav { padding: 20px 24px; }
-    nav.scrolled { padding: 12px 24px; }
     .nav-links { display: none; }
-    .nav-links.mobile-open { display: flex; flex-direction: column; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--deep-brown); align-items: center; justify-content: center; gap: 32px; z-index: 999; }
-    .hamburger { display: flex; }
-    #hero { padding: 0 24px; }
-    .hero-content { padding: 0; }
-    #collections, #products, #why, #newsletter, #testimonials, footer { padding: 80px 24px; }
-    .collections-grid { grid-template-columns: 1fr; }
-    .products-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
-    .why-grid { grid-template-columns: 1fr; gap: 40px; }
-    .why-features { grid-template-columns: 1fr; }
-    .products-header { flex-direction: column; align-items: flex-start; gap: 16px; }
-    .testimonials-grid { grid-template-columns: 1fr; }
-    .newsletter-form { flex-direction: column; }
-    .newsletter-input { border-right: 1.5px solid rgba(201,168,76,0.3); }
+    section { padding: 80px 24px; }
+    .hero-left { padding: 100px 24px 60px; }
+    .grid-4 { grid-template-columns: 1fr; }
+    .collections-header { flex-direction: column; gap: 16px; }
+    .lookbook-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+    .look-item:first-child { grid-column: auto; }
+    .look-visual { height: 300px; }
     .footer-top { grid-template-columns: 1fr; }
     .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
-    .cart-drawer { width: 100%; }
-    .lookbook-scroll, #lookbook .lookbook-header { padding: 0 24px; }
+    .newsletter-form { flex-direction: column; }
+    .newsletter-form input { border-right: 1px solid rgba(245,240,232,0.2); border-bottom: none; }
   }
 </style>
 </head>
 <body>
 
+<!-- Cursor -->
 <div class="cursor" id="cursor"></div>
-<div class="cursor-follower" id="cursorFollower"></div>
-<div class="toast" id="toast"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 
-<!-- CART -->
-<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
-<div class="cart-drawer" id="cartDrawer">
-  <div class="cart-header">
-    <h3>YOUR CART</h3>
-    <button class="cart-close" onclick="closeCart()">✕</button>
-  </div>
-  <div class="cart-items" id="cartItems">
-    <div class="cart-empty"><span class="cart-empty-icon">🛍️</span>YOUR CART IS EMPTY</div>
-  </div>
-  <div class="cart-footer" id="cartFooter" style="display:none;">
-    <div class="cart-total"><span>TOTAL</span><span id="cartTotal">₦0</span></div>
-    <button class="cart-checkout" onclick="showToast('🎉 Order placed! We will contact you soon.')">CHECKOUT NOW</button>
-  </div>
-</div>
-
-<!-- NAV -->
-<nav id="navbar">
-  <a href="#" class="logo">TEEMAH <span>STYLES</span></a>
-  <ul class="nav-links" id="navLinks">
-    <li><a href="#collections" onclick="closeMobileMenu()">Collections</a></li>
-    <li><a href="#products" onclick="closeMobileMenu()">Shop</a></li>
-    <li><a href="#lookbook" onclick="closeMobileMenu()">Lookbook</a></li>
-    <li><a href="#why" onclick="closeMobileMenu()">About</a></li>
-    <li>
-      <button class="cart-btn" onclick="openCart()">
-        🛍️ Cart
-        <span class="cart-count-badge" id="cartBadge">0</span>
-      </button>
-    </li>
-    <li><a href="#newsletter" class="nav-cta" onclick="closeMobileMenu()">Get Updates</a></li>
+<!-- Navigation -->
+<nav>
+  <a href="#" class="nav-logo">Teemah's</a>
+  <ul class="nav-links">
+    <li><a href="#collections">Collections</a></li>
+    <li><a href="#lookbook">Lookbook</a></li>
+    <li><a href="#philosophy">Philosophy</a></li>
+    <li><a href="#">Stores</a></li>
+    <li><a href="#">Account</a></li>
   </ul>
-  <button class="hamburger" id="hamburger" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
-  </button>
 </nav>
 
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
-  <div class="hero-content">
-    <p class="hero-eyebrow">✦ New Collection 2025 ✦</p>
-    <h1 class="hero-title">Dress to<br><em>Impress.</em></h1>
-    <p class="hero-desc">Where African elegance meets contemporary fashion. Every stitch tells a story of culture, craftsmanship, and couture confidence.</p>
-    <div class="hero-buttons">
-      <a href="#products" class="btn-primary"><span>Shop Now</span></a>
-      <a href="#lookbook" class="btn-outline">View Lookbook</a>
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Spring / Summer 2025</p>
+    <h1 class="hero-title">Wear<br>what <em>endures</em></h1>
+    <p class="hero-sub">Timeless pieces designed for the long haul. Crafted from materials that age beautifully — like you.</p>
+    <a href="#collections" class="btn-primary">
+      Explore Collection <span class="arrow">→</span>
+    </a>
+  </div>
+  <div class="hero-right">
+    <div class="hero-placeholder"></div>
+    <div class="hero-tag">
+      New Arrival<span>The Atelier Trench</span>
     </div>
   </div>
-  <div class="hero-float">
-    <div class="hero-float-card">
-      <div class="hero-float-inner">
-        <div class="hero-float-icon">👗</div>
-        <div class="hero-float-label">NEW SEASON</div>
-        <div class="hero-float-sub">TEEMAH × 2025</div>
-      </div>
-    </div>
-  </div>
-  <div class="hero-scroll"><div class="scroll-line"></div><span>Scroll</span></div>
+  <div class="hero-scroll-hint">Scroll</div>
 </section>
 
-<!-- MARQUEE -->
-<div class="marquee-section">
-  <div class="marquee-track">
-    <div class="marquee-item"><span>TEEMAH STYLES AND MORE</span><span class="marquee-dot"></span></div>
-    <div class="marquee-item"><span>LUXURY FASHION</span><span class="marquee-dot"></span></div>
-    <div class="marquee-item"><span>AFRICAN ELEGANCE</span><span class="marquee-dot"></span></div>
-    <div class="marquee-item"><span>MADE WITH LOVE</span><span class="marquee-dot"></span></div>
-    <div class="marquee-item"><span>WEAR YOUR STORY</span><span class="marquee-dot"></span></div>
-    <div class="marquee-item"><span>FREE SHIPPING LAGOS</span><span class="marquee-dot"></span></div>
-    <div class="marquee-item"><span>TEEMAH STYLES AND MORE</span><span class="marquee-dot"></span></div>
-    <div class="marquee-item"><span>LUXURY FASHION</span><span class="marquee-dot"></span></div>
-    <div class="marquee-item"><span>AFRICAN ELEGANCE</span><span class="marquee-dot"></span></div>
-    <div class="marquee-item"><span>MADE WITH LOVE</span><span class="marquee-dot"></span></div>
-    <div class="marquee-item"><span>WEAR YOUR STORY</span><span class="marquee-dot"></span></div>
-    <div class="marquee-item"><span>FREE SHIPPING LAGOS</span><span class="marquee-dot"></span></div>
+<!-- Marquee -->
+<div class="marquee-bar">
+  <div class="marquee-inner">
+    <span class="marquee-item">Responsible Materials</span>
+    <span class="marquee-item">Crafted to Last</span>
+    <span class="marquee-item">SS 2025 Now Available</span>
+    <span class="marquee-item">Free Shipping Over $200</span>
+    <span class="marquee-item">New York · London · Tokyo</span>
+    <span class="marquee-item">Responsible Materials</span>
+    <span class="marquee-item">Crafted to Last</span>
+    <span class="marquee-item">SS 2025 Now Available</span>
+    <span class="marquee-item">Free Shipping Over $200</span>
+    <span class="marquee-item">New York · London · Tokyo</span>
   </div>
 </div>
 
-<!-- COLLECTIONS -->
-<section id="collections">
-  <div class="section-header reveal">
-    <span class="section-tag">✦ Explore ✦</span>
-    <h2 class="section-title">Our <em>Collections</em></h2>
-  </div>
-  <div class="collections-grid reveal">
-    <div class="collection-card"><div class="card-bg card-bg-1"></div><div class="card-pattern"></div><div class="card-emoji">👗</div><div class="card-arrow">→</div><div class="card-overlay"><div class="card-cat">Signature</div><div class="card-name">Ankara Couture</div><div class="card-count">42 Pieces</div></div></div>
-    <div class="collection-card"><div class="card-bg card-bg-2"></div><div class="card-pattern"></div><div class="card-emoji">👔</div><div class="card-arrow">→</div><div class="card-overlay"><div class="card-cat">Formal</div><div class="card-name">Power Suits</div><div class="card-count">28 Pieces</div></div></div>
-    <div class="collection-card"><div class="card-bg card-bg-3"></div><div class="card-pattern"></div><div class="card-emoji">🥻</div><div class="card-arrow">→</div><div class="card-overlay"><div class="card-cat">Casual</div><div class="card-name">Street Chic</div><div class="card-count">35 Pieces</div></div></div>
-    <div class="collection-card"><div class="card-bg card-bg-4"></div><div class="card-pattern"></div><div class="card-emoji">👑</div><div class="card-arrow">→</div><div class="card-overlay"><div class="card-cat">Evening</div><div class="card-name">Royal Gowns</div><div class="card-count">19 Pieces</div></div></div>
-    <div class="collection-card"><div class="card-bg card-bg-5"></div><div class="card-pattern"></div><div class="card-emoji">👠</div><div class="card-arrow">→</div><div class="card-overlay"><div class="card-cat">Accessories</div><div class="card-name">Footwear & More</div><div class="card-count">54 Pieces</div></div></div>
-  </div>
-</section>
-
-<!-- PRODUCTS -->
-<section id="products">
-  <div class="products-header reveal">
+<!-- Collections -->
+<section class="collections" id="collections">
+  <div class="collections-header">
     <div>
-      <span class="section-tag" style="text-align:left;display:block;">✦ Featured ✦</span>
-      <h2 class="section-title">Best <em>Sellers</em></h2>
+      <div class="section-label">New Season</div>
+      <h2 class="section-title">The <em>Essentials</em></h2>
     </div>
-    <a href="#" class="view-all">View All →</a>
+    <p>A curated selection of foundational pieces built on the belief that true style outlasts every trend cycle.</p>
   </div>
-  <div class="products-grid reveal" id="productsGrid"></div>
-</section>
-
-<!-- WHY US -->
-<section id="why">
-  <div class="section-header reveal">
-    <span class="section-tag">✦ Why Teemah ✦</span>
-    <h2 class="section-title">Fashion with <em>Purpose</em></h2>
-  </div>
-  <div class="why-grid">
-    <div class="why-features reveal">
-      <div class="feature-item"><div class="feature-icon">✂️</div><div class="feature-title">Handcrafted Excellence</div><div class="feature-desc">Every piece is meticulously crafted by skilled artisans who pour their heart into each stitch.</div></div>
-      <div class="feature-item"><div class="feature-icon">🌍</div><div class="feature-title">African Heritage</div><div class="feature-desc">Celebrating the richness of African culture through patterns, colors, and timeless designs.</div></div>
-      <div class="feature-item"><div class="feature-icon">♻️</div><div class="feature-title">Sustainable Fashion</div><div class="feature-desc">Eco-conscious production — fashion that's good for you and the planet.</div></div>
-      <div class="feature-item"><div class="feature-icon">📦</div><div class="feature-title">Fast Delivery</div><div class="feature-desc">Same-day delivery across Lagos. Nationwide shipping in 2–4 business days.</div></div>
+  <div class="grid-4">
+    <div class="product-card">
+      <div class="product-img pv-1"><div class="product-img-inner">01</div></div>
+      <div class="product-overlay"><a href="#" class="product-overlay-btn">Quick Add</a></div>
+      <div class="product-info">
+        <div>
+          <div class="product-name">Atelier Trench</div>
+          <div class="product-type">Outerwear</div>
+        </div>
+        <div class="product-price">$485</div>
+      </div>
     </div>
-    <div class="why-visual reveal">
-      <div class="why-big-num">10+</div>
-      <div class="why-stats">
-        <div class="stat-item"><div class="stat-num" data-target="10">0</div><div class="stat-label">Years of Excellence</div></div>
-        <div class="stat-item"><div class="stat-num" data-target="5000">0</div><div class="stat-label">Happy Customers</div></div>
-        <div class="stat-item"><div class="stat-num" data-target="200">0</div><div class="stat-label">Unique Designs</div></div>
-        <div class="stat-item"><div class="stat-num" data-target="36">0</div><div class="stat-label">States We Deliver To</div></div>
+    <div class="product-card">
+      <div class="product-img pv-2"><div class="product-img-inner">02</div></div>
+      <div class="product-overlay"><a href="#" class="product-overlay-btn">Quick Add</a></div>
+      <div class="product-info">
+        <div>
+          <div class="product-name">Vault Tee</div>
+          <div class="product-type">Tops</div>
+        </div>
+        <div class="product-price">$95</div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img pv-3"><div class="product-img-inner">03</div></div>
+      <div class="product-overlay"><a href="#" class="product-overlay-btn">Quick Add</a></div>
+      <div class="product-info">
+        <div>
+          <div class="product-name">Raw Denim 01</div>
+          <div class="product-type">Bottoms</div>
+        </div>
+        <div class="product-price">$220</div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img pv-4"><div class="product-img-inner">04</div></div>
+      <div class="product-overlay"><a href="#" class="product-overlay-btn">Quick Add</a></div>
+      <div class="product-info">
+        <div>
+          <div class="product-name">Cashmere Rib</div>
+          <div class="product-type">Knitwear</div>
+        </div>
+        <div class="product-price">$310</div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img pv-5"><div class="product-img-inner">05</div></div>
+      <div class="product-overlay"><a href="#" class="product-overlay-btn">Quick Add</a></div>
+      <div class="product-info">
+        <div>
+          <div class="product-name">Canvas Overshirt</div>
+          <div class="product-type">Tops</div>
+        </div>
+        <div class="product-price">$185</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- LOOKBOOK -->
-<section id="lookbook">
-  <div class="lookbook-header section-header reveal">
-    <span class="section-tag">✦ Inspiration ✦</span>
-    <h2 class="section-title">The <em>Lookbook</em></h2>
-    <p style="margin-top:16px;font-size:1rem;color:rgba(247,240,230,0.5);letter-spacing:2px;">Drag to explore →</p>
+<!-- Philosophy -->
+<section class="philosophy" id="philosophy">
+  <div>
+    <div class="section-label">Our Ethos</div>
+    <h2 class="section-title">Built for<br>the <em>long haul</em></h2>
+    <p>We make fewer things, and we make them better. Every piece is engineered to outlast its decade — sourced from suppliers who share our obsession with longevity.</p>
+    <p>No fast fashion. No artificial scarcity. Just clothes that earn their place in your wardrobe year after year.</p>
+    <a href="#" class="btn-primary" style="margin-top:16px">Our Manifesto <span class="arrow">→</span></a>
   </div>
-  <div class="lookbook-scroll" id="lookbookScroll">
-    <div class="look-card"><div class="look-bg look-bg-1"></div><div class="look-emoji">💃</div><div class="look-info"><div class="look-num">LOOK 01</div><div class="look-name">Sunset Queen</div></div></div>
-    <div class="look-card"><div class="look-bg look-bg-2"></div><div class="look-emoji">🧣</div><div class="look-info"><div class="look-num">LOOK 02</div><div class="look-name">Urban Royale</div></div></div>
-    <div class="look-card"><div class="look-bg look-bg-3"></div><div class="look-emoji">👸</div><div class="look-info"><div class="look-num">LOOK 03</div><div class="look-name">Garden Party</div></div></div>
-    <div class="look-card"><div class="look-bg look-bg-4"></div><div class="look-emoji">🕺</div><div class="look-info"><div class="look-num">LOOK 04</div><div class="look-name">Lagos Nights</div></div></div>
-    <div class="look-card"><div class="look-bg look-bg-5"></div><div class="look-emoji">👰</div><div class="look-info"><div class="look-num">LOOK 05</div><div class="look-name">Bridal Bliss</div></div></div>
-    <div class="look-card"><div class="look-bg look-bg-6"></div><div class="look-emoji">🎭</div><div class="look-info"><div class="look-num">LOOK 06</div><div class="look-name">Festival Vibes</div></div></div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section id="testimonials">
-  <div class="section-header reveal">
-    <span class="section-tag">✦ Reviews ✦</span>
-    <h2 class="section-title">What Our <em>Queens Say</em></h2>
-  </div>
-  <div class="testimonials-grid reveal">
-    <div class="testimonial-card"><div class="stars">★★★★★</div><div class="testimonial-quote">"</div><p class="testimonial-text">I ordered my outfit for my sister's wedding and it arrived the next day. The quality was absolutely breathtaking. I got compliments all night!</p><div class="testimonial-author"><div class="author-avatar">👩🏾</div><div><div class="author-name">Adaeze Okafor</div><div class="author-loc">Lagos, NG</div></div></div></div>
-    <div class="testimonial-card"><div class="stars">★★★★★</div><div class="testimonial-quote">"</div><p class="testimonial-text">Teemah Styles is the definition of luxury at an affordable price. Every piece has been perfectly tailored and made with amazing fabric.</p><div class="testimonial-author"><div class="author-avatar">👩🏽</div><div><div class="author-name">Fatima Bello</div><div class="author-loc">Abuja, NG</div></div></div></div>
-    <div class="testimonial-card"><div class="stars">★★★★★</div><div class="testimonial-quote">"</div><p class="testimonial-text">My go-to brand for every occasion. From boardroom to owambe, Teemah always delivers. Customer service is top-notch — very responsive!</p><div class="testimonial-author"><div class="author-avatar">👩🏿</div><div><div class="author-name">Chisom Eze</div><div class="author-loc">Port Harcourt, NG</div></div></div></div>
-  </div>
-</section>
-
-<!-- NEWSLETTER -->
-<section id="newsletter">
-  <div class="newsletter-bg"></div>
-  <div class="newsletter-inner reveal">
-    <h2 class="newsletter-title">Stay <em>Stylish</em><br>Stay Updated</h2>
-    <p class="newsletter-sub">Be the first to know about new collections, exclusive drops, and special offers. Join the Teemah family today.</p>
-    <div class="newsletter-form">
-      <input type="email" class="newsletter-input" id="emailInput" placeholder="Enter your email address..." />
-      <button class="newsletter-btn" onclick="subscribe()">Subscribe</button>
+  <div class="philosophy-visual">
+    <div class="phil-block phil-block-1"></div>
+    <div class="phil-block phil-block-2"></div>
+    <div class="phil-block phil-block-3">
+      <div class="phil-number">12</div>
+      <div class="phil-label">Year Guarantee</div>
     </div>
-    <p class="newsletter-note">✦ No spam. Unsubscribe anytime. ✦</p>
+    <div class="phil-text-overlay">"Clothing that improves with time, like everything worth keeping."</div>
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- Lookbook -->
+<section class="lookbook" id="lookbook">
+  <div class="section-label">SS 2025</div>
+  <h2 class="section-title">The <em>Lookbook</em></h2>
+
+  <div class="lookbook-grid">
+    <div class="look-item">
+      <div class="look-visual lv-1"></div>
+      <div class="look-caption"><strong>Look 01 — The Weekender</strong><span>Trench + Rib Trouser</span></div>
+    </div>
+    <div class="look-item">
+      <div class="look-visual lv-2"></div>
+      <div class="look-caption"><strong>Look 02 — Evening</strong><span>Black Overshirt</span></div>
+    </div>
+    <div class="look-item">
+      <div class="look-visual lv-3"></div>
+      <div class="look-caption"><strong>Look 03 — Rust Hour</strong><span>Rust Collection</span></div>
+    </div>
+    <div class="look-item">
+      <div class="look-visual lv-4"></div>
+      <div class="look-caption"><strong>Look 04 — Earth</strong><span>Earth Tones Edit</span></div>
+    </div>
+    <div class="look-item">
+      <div class="look-visual lv-5"></div>
+      <div class="look-caption"><strong>Look 05 — Light</strong><span>Spring Neutrals</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Newsletter -->
+<section class="newsletter">
+  <div class="section-label">Stay Close</div>
+  <h2 class="section-title">Join the <em>Circle</em></h2>
+  <p>Early access, rare drops, and stories from our makers.</p>
+  <div class="newsletter-form">
+    <input type="email" placeholder="your@email.com">
+    <button type="button">Subscribe</button>
+  </div>
+</section>
+
+<!-- Footer -->
 <footer>
   <div class="footer-top">
-    <div class="footer-brand">
-      <a href="#" class="logo">TEEMAH <span>STYLES</span></a>
-      <p>Where African elegance meets contemporary fashion. Crafted with love, worn with pride — your ultimate fashion destination.</p>
-      <div class="social-links">
-        <a href="#" class="social-link">📷</a>
-        <a href="#" class="social-link">📘</a>
-        <a href="#" class="social-link">🎵</a>
-        <a href="#" class="social-link">💬</a>
-      </div>
+    <div>
+      <div class="footer-brand">Teemah's Styles and More</div>
+      <p class="footer-tagline">Elevated styles for every occasion. Made with love, designed to turn heads.</p>
     </div>
-    <div class="footer-col"><h4>Shop</h4><ul><li><a href="#">New Arrivals</a></li><li><a href="#">Ankara Couture</a></li><li><a href="#">Formal Wear</a></li><li><a href="#">Casual Looks</a></li><li><a href="#">Accessories</a></li><li><a href="#">Sale</a></li></ul></div>
-    <div class="footer-col"><h4>Info</h4><ul><li><a href="#">Our Story</a></li><li><a href="#">Sustainability</a></li><li><a href="#">Careers</a></li><li><a href="#">Press</a></li><li><a href="#">Lookbook</a></li></ul></div>
-    <div class="footer-col"><h4>Support</h4><ul><li><a href="#">Track Order</a></li><li><a href="#">Returns & Exchange</a></li><li><a href="#">Size Guide</a></li><li><a href="#">FAQs</a></li><li><a href="#">Contact Us</a></li></ul></div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="#">New Arrivals</a></li>
+        <li><a href="#">Outerwear</a></li>
+        <li><a href="#">Tops</a></li>
+        <li><a href="#">Bottoms</a></li>
+        <li><a href="#">Knitwear</a></li>
+        <li><a href="#">Accessories</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Brand</h4>
+      <ul>
+        <li><a href="#">About Vaultt</a></li>
+        <li><a href="#">Manifesto</a></li>
+        <li><a href="#">Sustainability</a></li>
+        <li><a href="#">Lookbook</a></li>
+        <li><a href="#">Stores</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="#">Sizing Guide</a></li>
+        <li><a href="#">Shipping & Returns</a></li>
+        <li><a href="#">Care Instructions</a></li>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">FAQ</a></li>
+      </ul>
+    </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2025 TEEMAH STYLES AND MORE. All rights reserved.</p>
-    <p>Made with ❤️ in Lagos, Nigeria</p>
+    <span>© 2025 Teemah's Styles and More. All rights reserved.</span>
+    <div class="social-links">
+      <a href="#">Instagram</a>
+      <a href="#">Pinterest</a>
+      <a href="#">Twitter</a>
+    </div>
+    <span>Privacy · Terms · Cookies</span>
   </div>
 </footer>
 
 <script>
-// CURSOR
-const cursor = document.getElementById('cursor');
-const follower = document.getElementById('cursorFollower');
-let mouseX = 0, mouseY = 0, fX = 0, fY = 0;
-document.addEventListener('mousemove', e => {
-  mouseX = e.clientX; mouseY = e.clientY;
-  cursor.style.left = (e.clientX - 6) + 'px';
-  cursor.style.top = (e.clientY - 6) + 'px';
-});
-(function animF() {
-  fX += (mouseX - fX - 18) * 0.12;
-  fY += (mouseY - fY - 18) * 0.12;
-  follower.style.left = fX + 'px';
-  follower.style.top = fY + 'px';
-  requestAnimationFrame(animF);
-})();
-document.querySelectorAll('a, button, .collection-card, .product-card, .feature-item, .look-card').forEach(el => {
-  el.addEventListener('mouseenter', () => { cursor.style.transform = 'scale(2)'; follower.style.transform = 'scale(1.5)'; });
-  el.addEventListener('mouseleave', () => { cursor.style.transform = ''; follower.style.transform = ''; });
-});
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mouseX = 0, mouseY = 0;
+  let ringX = 0, ringY = 0;
 
-// NAVBAR SCROLL
-window.addEventListener('scroll', () => {
-  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 80);
-});
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursor.style.left = mouseX + 'px';
+    cursor.style.top = mouseY + 'px';
+  });
 
-// MOBILE MENU
-let menuOpen = false;
-function toggleMenu() {
-  menuOpen = !menuOpen;
-  document.getElementById('navLinks').classList.toggle('mobile-open', menuOpen);
-  const spans = document.getElementById('hamburger').querySelectorAll('span');
-  if (menuOpen) { spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)'; spans[1].style.opacity = '0'; spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)'; }
-  else { spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; }); }
-}
-function closeMobileMenu() { if (menuOpen) toggleMenu(); }
+  // Smooth ring follow
+  function animateRing() {
+    ringX += (mouseX - ringX) * 0.12;
+    ringY += (mouseY - ringY) * 0.12;
+    ring.style.left = ringX + 'px';
+    ring.style.top = ringY + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
 
-// PRODUCTS
-const products = [
-  { name: "Ankara Wrap Dress", style: "Ankara · Women", price: "₦25,000", original: "₦32,000", badge: "New", emoji: "👗" },
-  { name: "Aso-Oke Blouse", style: "Traditional · Women", price: "₦18,000", original: null, badge: "Hot", emoji: "🥻" },
-  { name: "Agbada Set", style: "Traditional · Men", price: "₦45,000", original: "₦55,000", badge: "Sale", emoji: "🧥" },
-  { name: "Kaftan Gown", style: "Casual · Women", price: "₦22,000", original: null, badge: "New", emoji: "👘" },
-  { name: "Senator Suit", style: "Formal · Men", price: "₦60,000", original: "₦72,000", badge: "Popular", emoji: "👔" },
-  { name: "Boubou Maxi", style: "Evening · Women", price: "₦38,000", original: null, badge: "New", emoji: "👗" },
-  { name: "Print Kimono", style: "Casual · Unisex", price: "₦15,000", original: "₦19,000", badge: "Sale", emoji: "🎌" },
-  { name: "Lace Set", style: "Formal · Women", price: "₦42,000", original: null, badge: "Luxury", emoji: "💎" },
-];
+  // Hover effects on interactive elements
+  document.querySelectorAll('a, button, .product-card, .look-item').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.width = '16px';
+      cursor.style.height = '16px';
+      cursor.style.background = 'var(--rust)';
+      ring.style.width = '56px';
+      ring.style.height = '56px';
+      ring.style.opacity = '0.3';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.width = '8px';
+      cursor.style.height = '8px';
+      cursor.style.background = 'var(--char)';
+      ring.style.width = '36px';
+      ring.style.height = '36px';
+      ring.style.opacity = '0.5';
+    });
+  });
 
-const grid = document.getElementById('productsGrid');
-products.forEach((p, i) => {
-  const d = document.createElement('div');
-  d.className = 'product-card';
-  d.innerHTML = `<div class="product-img"><div class="product-emoji">${p.emoji}</div><div class="product-badge">${p.badge}</div><button class="product-wishlist" onclick="toggleWishlist(this)">♡</button><button class="product-add" onclick="addToCart('${p.name}','${p.price}','${p.emoji}')">ADD TO CART</button></div><div class="product-style">${p.style}</div><div class="product-name">${p.name}</div><div class="product-price">${p.price}${p.original ? `<span>${p.original}</span>` : ''}</div>`;
-  grid.appendChild(d);
-});
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
 
-function toggleWishlist(btn) {
-  btn.classList.toggle('active');
-  btn.textContent = btn.classList.contains('active') ? '♥' : '♡';
-  showToast(btn.classList.contains('active') ? '♥ Added to Wishlist' : '♡ Removed from Wishlist');
-}
-
-// CART
-const cart = [];
-function addToCart(name, price, emoji) {
-  const ex = cart.find(i => i.name === name);
-  ex ? ex.qty++ : cart.push({ name, price, emoji, qty: 1 });
-  updateCartBadge();
-  renderCart();
-  showToast('🛍️ Added to cart!');
-  openCart();
-}
-function updateCartBadge() {
-  const total = cart.reduce((a, c) => a + c.qty, 0);
-  const b = document.getElementById('cartBadge');
-  b.textContent = total;
-  b.classList.toggle('show', total > 0);
-}
-function renderCart() {
-  const c = document.getElementById('cartItems');
-  const f = document.getElementById('cartFooter');
-  if (!cart.length) { c.innerHTML = '<div class="cart-empty"><span class="cart-empty-icon">🛍️</span>YOUR CART IS EMPTY</div>'; f.style.display = 'none'; return; }
-  f.style.display = 'block';
-  let total = 0;
-  c.innerHTML = cart.map((item, i) => {
-    const n = parseInt(item.price.replace(/[^\d]/g,''));
-    total += n * item.qty;
-    return `<div class="cart-item"><div class="cart-item-img">${item.emoji}</div><div class="cart-item-info"><div class="cart-item-name">${item.name}</div><div class="cart-item-price">${item.price}</div><div class="cart-item-qty"><button class="qty-btn" onclick="changeQty(${i},-1)">−</button><span class="qty-num">${item.qty}</span><button class="qty-btn" onclick="changeQty(${i},1)">+</button></div></div><button class="cart-remove" onclick="removeCart(${i})">✕</button></div>`;
-  }).join('');
-  document.getElementById('cartTotal').textContent = '₦' + total.toLocaleString();
-}
-function changeQty(i, d) {
-  cart[i].qty += d;
-  if (cart[i].qty <= 0) cart.splice(i, 1);
-  updateCartBadge(); renderCart();
-}
-function removeCart(i) { cart.splice(i, 1); updateCartBadge(); renderCart(); }
-function openCart() { document.getElementById('cartDrawer').classList.add('open'); document.getElementById('cartOverlay').classList.add('open'); document.body.style.overflow = 'hidden'; }
-function closeCart() { document.getElementById('cartDrawer').classList.remove('open'); document.getElementById('cartOverlay').classList.remove('open'); document.body.style.overflow = ''; }
-
-// TOAST
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2500);
-}
-
-// NEWSLETTER
-function subscribe() {
-  const v = document.getElementById('emailInput').value.trim();
-  if (!v || !v.includes('@')) { showToast('⚠️ Please enter a valid email'); return; }
-  document.getElementById('emailInput').value = '';
-  showToast('✦ Welcome to the Teemah family!');
-}
-
-// SCROLL REVEAL
-const observer = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }); }, { threshold: 0.12 });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-// COUNTERS
-function animateCounter(el) {
-  const target = parseInt(el.dataset.target);
-  const step = target / 120;
-  let cur = 0;
-  const t = setInterval(() => {
-    cur = Math.min(cur + step, target);
-    el.textContent = Math.floor(cur).toLocaleString() + '+';
-    if (cur >= target) clearInterval(t);
-  }, 16);
-}
-const cobs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { animateCounter(e.target); cobs.unobserve(e.target); } }); }, { threshold: 0.5 });
-document.querySelectorAll('.stat-num[data-target]').forEach(c => cobs.observe(c));
-
-// LOOKBOOK DRAG
-const ls = document.getElementById('lookbookScroll');
-let isDrag = false, startX, scrollL;
-ls.addEventListener('mousedown', e => { isDrag = true; startX = e.pageX - ls.offsetLeft; scrollL = ls.scrollLeft; });
-ls.addEventListener('mouseleave', () => isDrag = false);
-ls.addEventListener('mouseup', () => isDrag = false);
-ls.addEventListener('mousemove', e => { if (!isDrag) return; e.preventDefault(); ls.scrollLeft = scrollL - (e.pageX - ls.offsetLeft - startX) * 1.5; });
+  document.querySelectorAll('.product-card, .look-item, .section-title, .section-label').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+    observer.observe(el);
+  });
 </script>
 </body>
 </html>
